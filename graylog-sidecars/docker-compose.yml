@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+    graylog-filebeat:
+      container_name: graylog-filebeat
+      build: 
+        context: .
+      environment:
+        - GS_SERVER_URL="http://127.0.0.1:9000/api/"
+        - GS_SERVER_API_TOKEN="133jjevpm01lgrm9vrnottbd5ev2rvrkapdfumkoo3m56305u28f"
+        - GS_NODE_NAME="sidecar-treinamento"
+        - GS_NODE_ID_VALUE=24febdde-2409-4e52-a8b3-5c47f7a62b20
+        # - GS_LIST_LOG_FILES=["/var/logs-treinamento"]
+      volumes:
+        -  /Users/dayane/Documents/Dev/Treinamentos/Graylog/graylog-sidecars/logs:/var/logs-treinamento
+      privileged: true
+      tty: true       
+      networks: 
+        - localdev
+        
+networks: 
+  localdev:
+    name: localdev

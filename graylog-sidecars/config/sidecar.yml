@@ -1,0 +1,105 @@
+# The URL to the Graylog server API.
+server_url: ${GS_SERVER_URL}
+
+# The API token to use to authenticate against the Graylog server API.
+# This field is mandatory
+server_api_token: ${GS_SERVER_API_TOKEN}
+
+# The node ID of the sidecar. This can be a path to a file or an ID string.
+# If set to a file and the file doesn't exist, the sidecar will generate an
+# unique ID and writes it to the configured path.
+#
+# Example file path: "file:/etc/graylog/sidecar/node-id"
+# Example ID string: "6033137e-d56b-47fc-9762-cd699c11a5a9"
+#
+# ATTENTION: Every sidecar instance needs a unique ID!
+#
+node_id: ${GS_NODE_ID}
+
+# The node name of the sidecar. If this is empty, the sidecar will use the
+# hostname of the host it is running on.
+node_name: ${GS_NODE_NAME}
+
+# The update interval in seconds. This configures how often the sidecar will
+# contact the Graylog server for keep-alive and configuration update requests.
+update_interval: ${GS_UPDATE_INTERVAL}
+
+# This configures if the sidecar should skip the verification of TLS connections.
+# Default: false
+tls_skip_verify: ${GS_TLS_SKIP_VERIFY}
+
+# This enables/disables the transmission of detailed sidecar information like
+# collector statues, metrics and log file lists. It can be disabled to reduce
+# load on the Graylog server if needed. (disables some features in the server UI)
+send_status: ${GS_SEND_STATUS}
+
+# A list of directories to scan for log files. The sidecar will scan each
+# directory for log files and submits them to the server on each update.
+#
+# Example:
+#     list_log_files:
+#       - "/var/log/nginx"
+#       - "/opt/app/logs"
+#
+# Default: empty list
+# list_log_files:
+#   - "/var/www/dotnet/SPA/dayane/logs/erro"
+list_log_files: ${GS_LIST_LOG_FILES}
+
+# Directory where the sidecar stores internal data.
+cache_path: ${GS_CACHE_PATH}
+
+# Directory where the sidecar stores logs for collectors and the sidecar itself.
+log_path: ${GS_LOG_PATH}
+
+# The maximum size of the log file before it gets rotated.
+log_rotate_max_file_size: ${GS_LOG_ROTATE_MAX_FILE_SIZE}
+
+# The maximum number of old log files to retain.
+log_rotate_keep_files: ${GS_LOG_ROTATE_KEEP_FILES}
+
+# How long to wait for the config validation command.
+collector_validation_timeout: ${GS_COLLECTOR_VALIDATION_TIMEOUT}
+
+# How long to wait for the collector to gracefully shutdown.
+# After this timeout the sidecar tries to terminate the collector with SIGKILL
+collector_shutdown_timeout: ${GS_COLLECTOR_SHUTDOWN_TIMEOUT}
+
+# Directory where the sidecar generates configurations for collectors.
+collector_configuration_directory: ${GS_COLLECTOR_CONFIGURATION_DIRECTORY}
+
+# A list of tags to assign to this sidecar. Collector configuration matching any of these tags will automatically be
+# applied to the sidecar.
+# Example:
+#    tags:
+#    - apache-logs
+#    - dns-logs
+tags: ${GS_TAGS}
+
+# A list of binaries which are allowed to be executed by the Sidecar. An empty list disables the access list feature.
+# Wildcards can be used, for a full pattern description see https://golang.org/pkg/path/filepath/#Match
+# Example:
+#     collector_binaries_accesslist:
+#       - "/usr/bin/filebeat"
+#       - "/opt/collectors/*"
+#
+#
+# Example disable access listing:
+#     collector_binaries_accesslist: []
+#
+# Default:
+# collector_binaries_accesslist:
+#  - "/usr/bin/filebeat"
+#  - "/usr/bin/packetbeat"
+#  - "/usr/bin/metricbeat"
+#  - "/usr/bin/heartbeat"
+#  - "/usr/bin/auditbeat"
+#  - "/usr/bin/journalbeat"
+#  - "/usr/share/filebeat/bin/filebeat"
+#  - "/usr/share/packetbeat/bin/packetbeat"
+#  - "/usr/share/metricbeat/bin/metricbeat"
+#  - "/usr/share/heartbeat/bin/heartbeat"
+#  - "/usr/share/auditbeat/bin/auditbeat"
+#  - "/usr/share/journalbeat/bin/journalbeat"
+#  - "/usr/bin/nxlog"
+#  - "/opt/nxlog/bin/nxlog"
